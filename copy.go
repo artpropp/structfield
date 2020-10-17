@@ -26,6 +26,10 @@ func Copy(dst, src interface{}) error {
 		if dstField.Kind() != valSrc.Field(i).Kind() {
 			continue
 		}
+		srcTag := typeSrcField.Tag
+		if srcTag.Get("structfield") == "nocopy" {
+			continue
+		}
 		dstField.Set(valSrc.Field(i))
 	}
 	return nil

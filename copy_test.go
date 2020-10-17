@@ -52,6 +52,21 @@ func TestCopy(t *testing.T) {
 			false,
 			"&{- 5}",
 		},
+		{
+			"Tags",
+			&struct {
+				A string
+				B string
+				C string
+			}{"-", "-", "-"},
+			struct {
+				A string `structfield:"nocopy"`
+				B string
+				C string
+			}{"A", "B", "C"},
+			false,
+			"&{- B C}",
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
